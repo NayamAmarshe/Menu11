@@ -254,9 +254,9 @@ Item {
         id: mainColumn
         anchors {
             top: searching ? searchField.bottom : mainLabelGrid.bottom
-            leftMargin:  units.largeSpacing * (searching ? 1.6 : 3)
-            rightMargin: anchors.leftMargin
-            topMargin: units.largeSpacing * 0.8
+            leftMargin:  units.largeSpacing * 2
+            rightMargin: units.largeSpacing
+            topMargin: units.largeSpacing
             left: parent.left
             right: parent.right
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
@@ -301,6 +301,9 @@ Item {
             width: parent.width
             model: rootModel.modelForRow(2)
             opacity: showAllApps && !searching ? 1.0 : 0.0
+            anchors {
+                leftMargin: units.largeSpacing * 2;
+            }
             onOpacityChanged: {
                 if (opacity == 1.0) {
                     mainColumn.visibleGrid = allAppsGrid;
@@ -316,6 +319,9 @@ Item {
             width: parent.width
             model: runnerModel
             opacity: searching ? 1.0 : 0.0
+            anchors {
+                rightMargin: units.largeSpacing * 2;
+            }
             onOpacityChanged: {
                 if (opacity == 1.0) {
                     mainColumn.visibleGrid = runnerGrid;
@@ -370,7 +376,7 @@ Item {
         id: recentItem
         width: parent.width
         anchors.top: mainColumn.bottom
-        anchors.topMargin: units.largeSpacing * 0.8
+        anchors.topMargin: units.largeSpacing
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.leftMargin: units.largeSpacing * 3
@@ -403,13 +409,13 @@ Item {
                 bottom: footer.top
                 // topMargin: parent.margins.top
                 bottomMargin: 0
-                topMargin: units.largeSpacing * 0.8
+                topMargin: units.largeSpacing
             }
 
             increaseLeftSpacings: true
 
             height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
-            cellWidth: parent.width * 0.4
+            cellWidth: parent.width * 0.45
             cellHeight: units.iconSizes.medium + units.smallSpacing * 5
             iconSize: units.iconSizes.medium
             model: rootModel.modelForRow(1);
