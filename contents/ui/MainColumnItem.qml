@@ -230,10 +230,10 @@ Item {
             border.color: "#cacbd0"
             radius: 5
         }
-        topPadding: 5
+        topPadding: 4
         bottomPadding: topPadding
-        leftPadding: showAllApps ? 4 : 8
-        rightPadding: showAllApps ? 8 : 4
+        leftPadding: showAllApps ? 8 : 8
+        rightPadding: showAllApps ? 4 : 4
         icon{
             width: height
             height: visible ? units.iconSizes.small : 0
@@ -254,9 +254,9 @@ Item {
         id: mainColumn
         anchors {
             top: searching ? searchField.bottom : mainLabelGrid.bottom
-            leftMargin:  units.largeSpacing * (searching ? 1.6 : 3)
-            rightMargin: anchors.leftMargin
-            topMargin: units.largeSpacing * 0.8
+            leftMargin: units.largeSpacing * 2
+            rightMargin: units.largeSpacing
+            topMargin: units.largeSpacing
             left: parent.left
             right: parent.right
             bottom: searching ? parent.bottom : showAllApps ? footer.top : undefined
@@ -274,7 +274,7 @@ Item {
             model: globalFavorites
             width: parent.width
             height: tileSide * 3
-            cellWidth: tileSide * 0.92
+            cellWidth: tileSide
             cellHeight: tileSide
             square: true
             dropEnabled: true
@@ -301,6 +301,9 @@ Item {
             width: parent.width
             model: rootModel.modelForRow(2)
             opacity: showAllApps && !searching ? 1.0 : 0.0
+            anchors {
+                leftMargin: units.largeSpacing * 2;
+            }
             onOpacityChanged: {
                 if (opacity == 1.0) {
                     mainColumn.visibleGrid = allAppsGrid;
@@ -313,6 +316,9 @@ Item {
             anchors.fill: parent
             z: (opacity == 1.0) ? 1 : 0
             enabled: (opacity == 1.0) ? 1 : 0
+            anchors {
+                rightMargin: units.largeSpacing * 2;
+            }
             width: parent.width
             model: runnerModel
             opacity: searching ? 1.0 : 0.0
@@ -370,11 +376,11 @@ Item {
         id: recentItem
         width: parent.width
         anchors.top: mainColumn.bottom
-        anchors.topMargin: units.largeSpacing * 0.8
+        anchors.topMargin: units.largeSpacing * 0.5
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.leftMargin: units.largeSpacing * 3
-        anchors.rightMargin: anchors.leftMargin
+        anchors.rightMargin: units.largeSpacing
 
         property int iconSize: 22
 
@@ -401,13 +407,11 @@ Item {
                 left: parent.left
                 right: parent.right
                 bottom: footer.top
-                // topMargin: parent.margins.top
                 bottomMargin: 0
-                topMargin: units.largeSpacing * 0.8
+                topMargin: units.largeSpacing
             }
 
             increaseLeftSpacings: true
-
             height: (units.iconSizes.medium + units.smallSpacing * 2) * 4
             cellWidth: parent.width * 0.4
             cellHeight: units.iconSizes.medium + units.smallSpacing * 5
